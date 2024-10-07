@@ -11,12 +11,13 @@
       pdf-format="a4"
       pdf-orientation="portrait"
       pdf-content-width="800px"
+      :html-to-pdf-options="htmlToPdfOptions"
       ref="html2Pdf"
     >
       <template v-slot:pdf-content>
         <section class="pdf-content">
           <!-- PDF Content Here -->
-          <table class="report">
+          <table class="report inslot">
             <tr>
               <th colspan="3" class="title">
                 <h1>장애처리 진행상황 보고</h1>
@@ -281,4 +282,82 @@ const gridItem = {
   maintTypeNm: '정기 점검',
   maintPrcsNm: '현장 방문'
 }
+
+// PDF 생성 옵션 설정
+const htmlToPdfOptions = {
+  margin: [10, 10],
+  filename: 'hehehe.pdf',
+  image: {
+    type: 'png',
+    quality: 0.98
+  },
+  enableLinks: false,
+  html2canvas: {
+    scale: 1,
+    useCORS: true
+  },
+  jsPDF: {
+    unit: 'mm',
+    format: 'a4',
+    orientation: 'portrait'
+  }
+};
 </script>
+<style>
+.report {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #fff;
+
+  &.inslot {
+    padding: 50px;
+  }
+
+  > * {
+    color: #242C2A;
+    word-break: keep-all;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  th, td {
+    border: 1px solid #e6e6e6;
+    padding: 8px;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  tr {
+    th {
+      width: 30%;
+    }
+  }
+
+  td {
+    img {
+      width: 350px;
+      height: auto;
+    }
+  }
+
+  .title {
+    background-color: #cdcdcd;
+  }
+  .subTitle {
+    background-color: #f1f1f1;
+  }
+
+  .responsibility {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+</style>
